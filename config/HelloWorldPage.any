@@ -1,0 +1,42 @@
+ #--------------------------------------------------------------------
+ # Copyright (c) 2000 itopia
+ # All Rights Reserved
+ #
+ # IntroPage: configuration file for the IntroPage page
+ #
+ # $Id$
+ #--------------------------------------------------------------------
+
+{
+    /PageTitle "Hello World Page"
+
+	/Body {
+		/Form {
+			/Method "GET"
+			/Action	"Hello"
+			/TemplateName { HelloWorldPage }
+		}
+	}
+
+
+	#---- Parts --------------------------------------------------------------
+	/Start {
+		/Form {
+			/Method "GET"
+			/Action	"GoPicturePage"
+			/Template {
+				"[[#wd Lookup StartButton ]]"
+			}
+		}
+	}
+
+	/StartButton {
+		/Button {
+			/Name "submit"
+			/Label {
+				/Type String
+				/Default "  Picture  "
+			}
+		}
+	}
+}

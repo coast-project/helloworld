@@ -1,0 +1,13 @@
+#--------------------------------------------------------------------
+# Copyright (c) 2001 itopia
+# All Rights Reserved
+#
+# $RCSfile$: comment purpose of file
+#
+#--------------------------------------------------------------------
+{
+	/ReadFileDAImpl {
+		/Filename "data"
+		/Extension "any"
+	}
+}
