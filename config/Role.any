@@ -1,0 +1,20 @@
+#--------------------------------------------------------------------
+# Copyright (c) 2000 Itopia
+# All Rights Reserved
+#
+# Role configuration file
+#--------------------------------------------------------------------
+{
+	/Version    "$Id$"
+
+	/Role				0					# security level
+
+    /Map {									# navigation map for this role
+        /Default {
+            /GoHelloWorldPage	HelloWorldPage
+            /GoPicturePage		PicturePage
+        }
+    }
+
+    /SessionTimeout  	300					# timeout in seconds
+}

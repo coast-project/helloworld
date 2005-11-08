@@ -1,0 +1,22 @@
+#--------------------------------------------------------------------
+# Copyright (c) 2004 SYNLOGIC
+# All Rights Reserved
+#--------------------------------------------------------------------
+{
+	/Version    "$Id$"
+
+	/ServerBlowfishScrambler {
+		#! Maximum length of key is 72 Bytes.
+		/Key			!"bf_key.any?Key"								# TestCases tkf foolabs itopia DevTest
+#		/Key			!"file:/home/secure_items/bf_key.any?Key"		# Prod
+		# Initialization vector of 2 x 32 bits,  extends the key of a BlowfishCBCScrambler
+		/InitVec0 		!"bf_key.any?InitVec0"							# TestCases tkf foolabs itopia DevTest
+		/InitVec1		!"bf_key.any?InitVec1"							# TestCases tkf foolabs itopia DevTest
+#		/InitVec0 		!"file:/home/secure_items/bf_key.any?InitVec0"	# Prod
+#		/InitVec1		!"file:/home/secure_items/bf_key.any?InitVec1"	# Prod
+	}
+	/ServerMD5Signer {
+		/Key			!"sign_key.any?Key"								# TestCases tkf foolabs itopia DevTest
+#		/Key			!"file:/home/secure_items/sign_key.any?Key"		# Prod
+	}		
+}
