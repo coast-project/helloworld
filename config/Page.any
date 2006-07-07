@@ -1,0 +1,59 @@
+#--------------------------------------------------------------------
+# Copyright (c) 2000 itopia
+# All Rights Reserved
+#--------------------------------------------------------------------
+{
+	/Version    "$Id$"
+
+	#---- Overall Page Layout --------------------------------------------------
+	/PageLayout {
+		/HTML {
+			/TemplateName { SharedPageLayout }
+		}
+	}
+
+	#---- Header stuff ---------------------------------------------------------
+	/Header {
+		{
+			"<a name=top></a><table width=100%>"
+				"<tr>"
+					"<td width=80% align=center>"
+						"<h1>Hello World Example</h1>"
+						"<h3>"{/Lookup PageTitle }"</h3>"
+					"</td>"
+					"<td width=20%>"
+						{/Image  {
+							/ImageName somelogo_small.gif
+							/Options {
+								"alt='somelogo'"
+							}
+						}}
+					"</a></td>"
+				"</tr>"
+			"</table>"
+			"<hr>"
+		}
+	}
+
+	#---- Parts ----------------------------------------------------------------
+
+    #---- Footer stuff ---------------------------------------------------------
+    /Footer {
+		"<hr>"
+		"<table width=100%>"
+			"<tr>"
+				"<td width=35% align=left>"
+					"Today is: "
+					{/Date { /Format "%A the %#d. %B %Y, %X" }}
+				"</td>"
+				"<td width=30% align=center>"
+					"Powered by WebDisplay2"
+				"</td>"
+				"<td width=35% align=right>"
+					"<a href='mailto:marcel.huber@telekurs.com'>Changes are welcome: marcel.huber@telekurs.com</a>"
+				"</td>"
+			"</tr>"
+		"</table>"
+		"<hr><a href='#top'>Top of the page</a><p>"
+	}
+}
