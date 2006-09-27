@@ -1,0 +1,44 @@
+#--------------------------------------------------------------------
+# Copyright (c) 2001 itopia
+# All Rights Reserved
+#--------------------------------------------------------------------
+{
+	/Version    "$Id$"
+
+	/DLL {
+		dataaccess
+		renderers
+		security
+	}
+	
+	/Modules {
+		CacheHandlerModule
+		SSLModule		
+		SecurityModule	
+		DataAccessModule
+		DataAccessImplsModule
+		MappersModule
+	}
+	/SecurityModule	{}
+	/DataAccessImpls {
+		/WriteFileDAImpl {
+			TestFileWrite
+		}
+		/ReadFileDAImpl {
+			TestFileRead
+		}
+	}
+	
+	/Mappers {
+		/Input {
+			/Mapper {
+				TestFileWrite TestFileRead
+			}
+		}
+		/Output {
+			/Mapper {
+				TestFileWrite TestFileRead
+			}
+		}
+	}
+}

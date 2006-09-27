@@ -1,0 +1,241 @@
+#--------------------------------------------------------------------
+# Copyright (c) 2000 itopia
+# All Rights Reserved
+#
+# Config: basic server configuration
+#--------------------------------------------------------------------
+{
+	/Version	"$Id$"
+
+	/DLL {								# names of dynamically loaded libraries
+		stddataaccess
+		security
+		renderers
+		actions
+		helloworld
+	}
+
+#################################################################################
+#
+#	Module List definition
+#	List of modules that are getting configured during GlobalInit and ReInit
+#
+#################################################################################
+
+	/Modules {
+		CacheHandlerModule
+		LocalizationModule
+		SecurityModule
+		DataAccessImplsModule
+		MappersModule
+		RenderersModule
+		RolesModule
+		PagesModule
+		TemplatesCacheModule
+		SessionListManager
+		ActionsModule
+		AcceptorFactoriesModule
+		ServiceHandlersModule
+		ServiceDispatchersModule
+		ServersModule
+		AppLogModule
+	}
+
+#--- AcceptorFactoriesModule configuration ----------------------------
+	/AcceptorFactories {
+		/AcceptorFactory {
+			HTTP
+		}
+		/SSLAcceptorFactory {
+			HTTPS
+		}
+	}
+
+	/HTTP {				# defines http listener
+		/Port 51000		# DevTest TestCases itopia tkf Prod
+#		/Port 80		# TestCases foolabs
+	}
+	/HTTPS {			# defines https listener
+		/Port 51001		# DevTest TestCases itopia tkf Prod
+#		/Port 443		# TestCases foolabs
+		#--- SSL configuration needs certificate and private key files
+		/CertFileServer	"recipes_cert.pem"
+		/KeyFileServer	"recipes_key.pem"
+	}
+
+	/Server {
+		Server						# the server that is in control
+	}
+
+	/Servers {
+		/Server		*
+	}
+
+	/SessionListManager {
+		/MaxSessionsAllowed	20
+		/CleanerTimeout		60
+	}
+ 
+	/ServiceDispatchers {}
+
+	/ContentGzipEncoding {
+		/"text/html"	1
+	}
+
+#--------------------------------------------------------------------
+#---															  ---
+#---			Module configurations							  ---
+#---															  ---
+#--------------------------------------------------------------------
+#--- RolesModule configuration --------------------------------------
+	/Roles {
+		/Role { }
+	}
+
+#--- PagesModule configuration ---------------------------------------
+	/Pages {
+		# subclasses for "Page"
+		/Page {
+			HelloWorldPage
+			PicturePage
+		}
+	}
+
+#--- ServiceHandlersModule configuration ---------------------------------------
+	/ServiceHandlers {
+		/SimpleDataAccessService { HttpFile }
+	}
+
+#--- SecurityModule configuration -------------------------------------
+	/SecurityModule {			# settings from URL encoding
+		/SecurityItems {
+			/Base64	{ b64 }
+			/Scrambler {
+				/BlowfishCBCScrambler {
+					ServerBlowfishScrambler
+				}
+			}
+			/MD5Signer { ServerMD5Signer }
+			/TableCompressor { tc }
+		}
+
+		/Scrambler 		ServerBlowfishScrambler
+		/Encoder 		b64
+		/Signer	 		ServerMD5Signer
+		/Compressor		tc
+
+#		/Scrambler		bs		# blowfish scrambler
+#		/Encoder		b64		# base 64 encoder
+#		/Signer			md5		# md 5
+	}
+
+#--- DataAccessImpls configuration ------------------------------------
+	/DataAccessImpls {
+		/HTTPFileLoader {
+			HttpFile		# simple loader for static files
+		}
+	}
+
+#--- Mappers configuration -------------------------------------
+	/Mappers {
+		/Input {
+			/URI2FileNameMapper {
+				HttpFile
+			}
+		}
+		/Output {
+			/HTTPBodyMapper {
+				HttpFile	# simple output mapper for different static files
+							# it needs http body mapper because of the binary image
+			}
+ 		}
+	}
+
+#--- RendererModule configuration -------------------------------------
+	/Renderers {				# aliases for Renderers
+		/TableRenderer 			{	Table	}
+		/FormRenderer 			{	Form	}
+		/HTMLTemplateRenderer	{	HTML	}
+		/ContextLookupRenderer	{	ContextLookup	Lookup	Render	}
+		/LinkRenderer 			{	Link FullLink	}
+		/URLRenderer 			{	URL	FullURL	}
+		/ImageRenderer 			{	Image	}
+		/StringRenderer 		{	String	}
+		/StringCompareRenderer 	{	StringCompare	}
+		/TextAreaRenderer 		{	TextArea	}
+		/ConditionalRenderer 	{	Condition	}
+		/HiddenFieldRenderer 	{	Hidden		}
+		/TextFieldRenderer 		{	Text	}
+		/ButtonRenderer 		{	Button }
+		/RadioButtonRenderer	{	Radio }
+		/CheckBoxRenderer		{	CheckBox }
+		/ListRenderer 			{	List	}
+		/BaseURLRenderer 		{	Base	}
+		/LanguageSwitchRenderer	{ 	Localized }
+		/SwitchRenderer			{ 	Switch }
+		/SelectBoxRenderer		{ 	Select }
+		/PulldownMenuRenderer	{	Pulldown }
+		/DateRenderer			{ 	Date }
+		/CeilingRenderer		{	Ceiling }
+		/FloorRenderer		    {	Floor }
+		/NavBarRenderer			{ 	NavBar }
+		/EscapeRenderer			{ 	Escape }
+		/ContainsRenderer		{	Contains }
+		/PageNameRenderer		{ 	PageName }
+		/FileBrowseRenderer		{	File }
+		/AppletRenderer 		{	Applet }
+		/ItemRenderer			{	Item }
+		/ImageButtonRenderer	{	ImageButton }
+		/ImageLocationRenderer	{	ImageLocation }
+	}
+
+#--- ActionsModule configuration --------------------------------------
+	/Actions {					# aliases for Actions
+		/HelloWorldAction		{	Hello	}
+	}
+#--- TemplateCache
+	/HTMLTemplateConfig {
+		/TemplateDir		"config/HTMLTemplates"
+		/LanguageDirMap {	# maps language key to localized templates dir
+	#		/D				"Localized_D"
+	#		/E				"Localized_E"
+	#		/F				"Localized_F"
+	#		/I				"Localized_I"
+			/D				"."
+			/E				"."
+			/F				"."
+			/I				"."
+		}
+	}
+
+#	Report security  relevant requests
+	/AppLogModule
+	{
+		#! Where the logfiles are kept
+		/LogDir		"logs"
+		#! When to rotate the logifles in hour:minute
+		/RotateTime	"23:50"
+		/Servers
+		{
+			/Server
+			{
+				/SecurityLog
+				{
+					/FileName "Security.log"
+					/Header	"# TimeStamp REMOTE_ADDR HTTPS? [RequestLine] [HttpStatusCode:HttpResponseMsg] [Reason] [FaultyRequestLine]"
+					/Format {
+						{ /DateRenderer { /Format "%a, %m-%d-%Y %T" /DeltaGMT 1 }  }
+						" "
+						{ /Lookup RequestReader.REMOTE_ADDR }
+						" "
+						{ /Lookup RequestReader.HTTPS }
+						" [" { /Lookup RequestReader.Request.REQUEST_METHOD } "]"
+						" [" { /Lookup RequestReader.HttpStatusCode } ":" { /Lookup RequestReader.HttpResponseMsg } "]"
+						" [" { /Lookup RequestReader.Reason } "]"
+						" [" { /Lookup RequestReader.FaultyRequestLine } "]"
+					}
+				}
+			}
+		}
+	}
+}
