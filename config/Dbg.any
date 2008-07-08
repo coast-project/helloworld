@@ -1,0 +1,290 @@
+ #--------------------------------------------------------------------
+ # Copyright (c) 2000 itopia
+ # All Rights Reserved
+ #
+ # Dbg.any : tracing configuration file
+ #--------------------------------------------------------------------
+{
+	/Version		"$Id$"
+
+	/LowerBound		0
+	/UpperBound		44
+	/DumpAnythings  1
+
+	/Server {
+		/MainSwitch						10
+		/EnableAll						20
+		/Run							10
+		/Accept							10
+		/Interrupt						10
+		/LookupSession					10
+		/Get							10
+	}
+
+    /Role {
+		/MainSwitch						40
+		/EnableAll						50
+
+		/Misc							40
+		/LoadStore						40
+		/Lookup							40
+		/ConstLookup					40
+
+		/GetNewPage {
+			/MainSwitch					40
+			/EnableAll					50
+		}
+
+		/New							40
+		/HTMLRoleStore					40
+
+	}
+
+	/SimpleAnyLoader {
+		/Load							0
+	}
+
+	/Context {
+		/MainSwitch						40
+		/EnableAll						0
+
+		/HTMLWDDebug {
+			/MainSwitch					40
+			/EnableAll					40
+
+			/TmpStore					40
+			/EnvStore					40
+			/QueryStore					40
+		}
+		/Lookup							40
+	}
+
+	/ZipOStreamBuf {
+		/MainSwitch						44
+		/EnableAll						44
+	}
+	/Page {
+		/MainSwitch						100
+		/EnableAll						120
+
+		/SetTitle						20
+		/Lookup {
+			/MainSwitch					20
+			/EnableAll					30
+
+			/Super						20
+			/Index						20
+			/Element					20
+			/Config						20
+		}
+
+		/Mime							20
+		/Header							20
+		/Body							20
+		/Footer							20
+		#/Render {
+		#	/MainSwitch					15
+		#
+		#	/Render						15
+		#	/HTMLDbg					20
+		#}
+
+		/FindPage						20
+		/Register 						20
+		/PageInstaller					20
+
+		/LoadConfig 					20
+		/IntLoadConfig 					20
+
+		/New							20
+		/Install						20
+		/InstallPages					20
+		/DoInstallPage					20
+
+		/Action							20
+		/Preprocess						20
+		/Postprocess					20
+	}
+
+    /Session {
+		/MainSwitch						20
+		/EnableAll						30
+
+		/Session						20
+		/Finalize						20
+		/Terminate						20
+		/GetRole						20
+		/Lookup							20
+		/HTMLSessionStore				20
+
+		/RenderNextPage {
+			/MainSwitch					20
+
+			/Any						20
+			/Query						20
+			/RoleExchange				20
+			/Switch						20
+		}
+
+		/GetPersistentName				20
+		/WriteLinkStatePersistent		20
+
+
+		/DoCallActionOn	{
+			/Current 					20
+			/Action						20
+		}
+	}
+
+	/Action {
+		/MainSwitch						60
+		/EnableAll						70
+
+		/Register						60
+		/Find							60
+		/DoAction						60
+	}
+
+	/EvalExpression {
+		/MainSwitch						500
+		/EnableAll						500
+	}
+
+	/SecurityModule {
+		/MainSwitch						40
+		/EnableAll						0
+	}
+#--- Renderers -------------------------------------
+
+	/Renderer {
+		/MainSwitch						40
+		/EnableAll						50
+
+		/RendererInstaller				40
+		/Register						40
+		/FindRenderer					0
+	}
+
+	/TableRenderer {
+		/MainSwitch						50
+		/EnableAll						60
+
+		/RenderAll						50
+		/DoRender						50
+		/DoRenderOpen {
+			/Any						50
+			/Nav 						50
+		}
+		/ExpandRow {
+			/DataElem					50
+			/ExpandRow					50
+		}
+		/RenderList						50
+	}
+
+	/HTMLTemplateRenderer {
+		/MainSwitch						4
+		/EnableAll						40
+		/RenderAll						44
+	}
+	/HTMLTemplateCacheLoader {
+		/MainSwitch						0
+		/EnableAll						40
+		/Load							50
+		/CompactHTMLBlocks				50
+	}
+
+	/ItemRenderer {
+		/MainSwitch						60
+		/EnableAll						70
+
+		/RenderItem						60
+		/PrintURL						60
+	}
+
+	/DateRenderer {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+
+	/ConditionalRenderer {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+
+	/ContextLookupRenderer {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+
+	/LinkRenderer {
+		/MainSwitch						60
+		/EnableAll						70
+
+		/RenderAll						60
+	}
+
+	/ImageButtonRenderer {
+		/MainSwitch						60
+		/EnableAll						70
+
+		/RenderAll						60
+	}
+
+	/URLPrinter {
+		/MainSwitch						10
+		/EnableAll						20
+
+		/RenderAll						10
+		/BuildPrivateState				10
+	}
+
+	/FullURLPrinter {
+		/MainSwitch						10
+		/EnableAll						20
+
+		/RenderAll						10
+	}
+
+	/BaseURLPrinter {
+		/MainSwitch						10
+		/EnableAll						20
+
+		/RenderAll						10
+	}
+
+	/URLRenderer {
+		/MainSwitch						10
+		/EnableAll						20
+
+		/RenderAll						10
+	}
+
+	/StringRenderer {
+		/MainSwitch						40
+		/EnableAll						50
+
+		/RenderAll						40
+	}
+
+
+	/Registry {
+		/MainSwitch						10
+		/EnableAll						20
+
+	}
+
+	/AppletRenderer {
+		/MainSwitch						100
+		/EnableAll						110
+	}
+
+#--- HelloWorld specific stuff -------------------------------------
+
+	/HelloWorldAction {
+		/MainSwitch						50
+		/EnableAll						60
+
+		/DoExecAction					50
+	}
+}
