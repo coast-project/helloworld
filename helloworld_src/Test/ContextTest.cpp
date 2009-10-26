@@ -22,13 +22,6 @@
 //--- interface include -------------------------------------------------------
 #include "ContextTest.h"
 
-#if defined(__GNUG__) || defined(__SUNPRO_CC)
-	#ident "@(#) $Id$ (c) itopia"
-#else
-	static char static_c_rcs_id[] = "@(#) $Id$ (c) itopia";
-	static char static_h_rcs_id[] = ContextTest_H_ID;
-#endif
-
 //---- ContextTest ----------------------------------------------------------------
 ContextTest::ContextTest(TString tstrName) : TestCaseType(tstrName)
 {

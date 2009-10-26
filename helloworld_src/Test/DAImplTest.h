@@ -12,12 +12,6 @@
 	#pragma interface
 #endif
 
-#if defined(__GNUG__) || defined(__SUNPRO_CC)
-	#ident "@(#) $Id$ (c) itopia"
-#else
-	#define DAImplTest_H_ID "@(#) $Id$ (c) itopia"
-#endif
-
 //---- baseclass include -------------------------------------------------
 #include "TestCase.h"
 

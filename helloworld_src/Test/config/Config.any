@@ -6,9 +6,9 @@
 	/Version    "$Id$"
 
 	/DLL {
-		dataaccess
-		renderers
-		security
+		CoastDataAccess
+		CoastRenderers
+		CoastSecurity
 	}
 	
 	/Modules {

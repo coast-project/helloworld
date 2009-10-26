@@ -23,7 +23,7 @@
 					"</td>"
 					"<td width=20%>"
 						{/Image  {
-							/ImageName somelogo_small.gif
+							/ImageName hsr-logo-60h.jpg
 							/Options {
 								"alt='somelogo'"
 							}
@@ -50,7 +50,7 @@
 					"Powered by WebDisplay2"
 				"</td>"
 				"<td width=35% align=right>"
-					"<a href='mailto:marcel.huber@telekurs.com'>Changes are welcome: marcel.huber@telekurs.com</a>"
+					"<a href='mailto:marcel.huber@hsr.ch'>Changes are welcome: marcel.huber@hsr.ch</a>"
 				"</td>"
 			"</tr>"
 		"</table>"

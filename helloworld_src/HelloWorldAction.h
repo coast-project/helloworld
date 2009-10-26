@@ -14,12 +14,6 @@
 	#pragma interface
 #endif
 
-#if defined(__GNUG__) || defined(__SUNPRO_CC)
-	#ident "@(#) $Id$ (c) itopia"
-#else
-	#define HelloWorldAction_H_ID "@(#) $Id$ (c) itopia"
-#endif
-
 //---- Action include -------------------------------------------------
 #include "config_helloworld.h"
 #include "Action.h"

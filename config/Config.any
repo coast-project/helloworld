@@ -1,18 +1,16 @@
 #--------------------------------------------------------------------
 # Copyright (c) 2000 itopia
 # All Rights Reserved
-#
-# Config: basic server configuration
 #--------------------------------------------------------------------
 {
 	/Version	"$Id$"
 
-	/DLL {								# names of dynamically loaded libraries
-		stddataaccess
-		security
-		renderers
-		actions
-		helloworld
+	/DLL {
+		CoastStdDataAccess
+		CoastSecurity
+		CoastRenderers
+		CoastActions
+		Helloworld
 	}
 
 #################################################################################
@@ -75,7 +73,7 @@
 		/MaxSessionsAllowed	20
 		/CleanerTimeout		60
 	}
- 
+
 	/ServiceDispatchers {}
 
 	/ContentGzipEncoding {

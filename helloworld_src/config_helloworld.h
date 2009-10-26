@@ -6,12 +6,6 @@
 #ifndef _CONFIG_HELLOWORLD_H
 #define _CONFIG_HELLOWORLD_H
 
-#if defined(__GNUG__) || defined(__SUNPRO_CC)
-	#ident "@(#) $Id$ (c) itopia"
-#else
-	#define config_HELLOWORLD_H_ID "@(#) $Id$ (c) itopia"
-#endif
-
 // WIN32 settings for Windows NT
 #if defined(WIN32)
 	#ifdef _DLL
