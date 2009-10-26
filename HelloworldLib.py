@@ -1,8 +1,17 @@
-import os
+import os, pdb
 import StanfordUtils
 from stat import *
 
 packagename = StanfordUtils.getPackageName(__name__)
+
+def setUp(target, source, env):
+    logpath = env['BASEOUTDIR'].Dir(os.path.join('tests', packagename, 'logs', 'rotate'))
+    path = env['BASEOUTDIR'].Dir(os.path.join('tests', packagename)).Dir('config')
+    if not os.path.isdir(logpath.abspath):
+        os.makedirs(logpath.abspath)
+
+def tearDown(target, source, env):
+    pass
 
 buildSettings = {
     packagename : {
@@ -21,6 +30,10 @@ buildSettings = {
         'requires'         : [packagename + '.' + packagename, 'CoastRenderers', 'CoastStdDataAccess', 'CoastAppLog'],
         'usedTarget'       : 'wdapp.wdapp',
         'copyFiles'        : [(StanfordUtils.findFiles(['config'],['.txt', '.html', '.any', '.pem', '.png', '.jpg']), S_IRUSR|S_IRGRP|S_IROTH)],
+        'runConfig'        : {
+            'setUp': setUp,
+            'tearDown': tearDown,
+        },
     },
 }
 
