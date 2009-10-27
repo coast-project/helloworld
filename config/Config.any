@@ -1,15 +1,17 @@
 #--------------------------------------------------------------------
-# Copyright (c) 2000 itopia
-# All Rights Reserved
+# Copyright (c) 2009, Peter Sommerlad and IFS Institute for Software at HSR Rapperswil, Switzerland
+# All rights reserved.
+#
+# This library/application is free software; you can redistribute and/or modify it under the terms of
+# the BSD-style license that is included with this library/application in the file license.txt.
 #--------------------------------------------------------------------
 {
-	/Version	"$Id$"
-
 	/DLL {
-		CoastStdDataAccess
 		CoastSecurity
 		CoastRenderers
+		CoastStdDataAccess
 		CoastActions
+		CoastAppLog
 		Helloworld
 	}
 
@@ -28,18 +30,25 @@
 		MappersModule
 		RenderersModule
 		RolesModule
+		ActionsModule
 		PagesModule
 		TemplatesCacheModule
-		SessionListManager
-		ActionsModule
 		AcceptorFactoriesModule
+		SessionListManager
 		ServiceHandlersModule
 		ServiceDispatchersModule
 		ServersModule
 		AppLogModule
 	}
 
+#--------------------------------------------------------------------
+#---															  ---
+#---			Module configurations							  ---
+#---															  ---
+#--------------------------------------------------------------------
+
 #--- AcceptorFactoriesModule configuration ----------------------------
+
 	/AcceptorFactories {
 		/AcceptorFactory {
 			HTTP
@@ -49,17 +58,10 @@
 		}
 	}
 
-	/HTTP {				# defines http listener
-		/Port 51000		# DevTest TestCases itopia tkf Prod
-#		/Port 80		# TestCases foolabs
-	}
-	/HTTPS {			# defines https listener
-		/Port 51001		# DevTest TestCases itopia tkf Prod
-#		/Port 443		# TestCases foolabs
-		#--- SSL configuration needs certificate and private key files
-		/CertFileServer	"recipes_cert.pem"
-		/KeyFileServer	"recipes_key.pem"
-	}
+	# defines http listener
+	/HTTP	!Defaults.any?HTTP
+	# defines https listener
+	/HTTPS	!Defaults.any?HTTPS
 
 	/Server {
 		Server						# the server that is in control
@@ -80,17 +82,30 @@
 		/"text/html"	1
 	}
 
-#--------------------------------------------------------------------
-#---															  ---
-#---			Module configurations							  ---
-#---															  ---
-#--------------------------------------------------------------------
 #--- RolesModule configuration --------------------------------------
+
 	/Roles {
 		/Role { }
 	}
 
+#--- HTML Templates configuration ------------------------------------
+
+	/HTMLTemplateConfig {
+		/TemplateDir		"config/HTMLTemplates"
+		/LanguageDirMap {	# maps language key to localized templates dir
+	#		/D				"Localized_D"
+	#		/E				"Localized_E"
+	#		/F				"Localized_F"
+	#		/I				"Localized_I"
+			/D				"."
+			/E				"."
+			/F				"."
+			/I				"."
+		}
+	}
+
 #--- PagesModule configuration ---------------------------------------
+
 	/Pages {
 		# subclasses for "Page"
 		/Page {
@@ -100,11 +115,13 @@
 	}
 
 #--- ServiceHandlersModule configuration ---------------------------------------
+
 	/ServiceHandlers {
 		/SimpleDataAccessService { HttpFile }
 	}
 
 #--- SecurityModule configuration -------------------------------------
+
 	/SecurityModule {			# settings from URL encoding
 		/SecurityItems {
 			/Base64	{ b64 }
@@ -121,13 +138,10 @@
 		/Encoder 		b64
 		/Signer	 		ServerMD5Signer
 		/Compressor		tc
-
-#		/Scrambler		bs		# blowfish scrambler
-#		/Encoder		b64		# base 64 encoder
-#		/Signer			md5		# md 5
 	}
 
 #--- DataAccessImpls configuration ------------------------------------
+
 	/DataAccessImpls {
 		/HTTPFileLoader {
 			HttpFile		# simple loader for static files
@@ -135,6 +149,7 @@
 	}
 
 #--- Mappers configuration -------------------------------------
+
 	/Mappers {
 		/Input {
 			/URI2FileNameMapper {
@@ -150,6 +165,7 @@
 	}
 
 #--- RendererModule configuration -------------------------------------
+
 	/Renderers {				# aliases for Renderers
 		/TableRenderer 			{	Table	}
 		/FormRenderer 			{	Form	}
@@ -191,34 +207,17 @@
 	/Actions {					# aliases for Actions
 		/HelloWorldAction		{	Hello	}
 	}
-#--- TemplateCache
-	/HTMLTemplateConfig {
-		/TemplateDir		"config/HTMLTemplates"
-		/LanguageDirMap {	# maps language key to localized templates dir
-	#		/D				"Localized_D"
-	#		/E				"Localized_E"
-	#		/F				"Localized_F"
-	#		/I				"Localized_I"
-			/D				"."
-			/E				"."
-			/F				"."
-			/I				"."
-		}
-	}
 
-#	Report security  relevant requests
-	/AppLogModule
-	{
+#--- AppLogModule configuration --------------------------------------
+
+	/AppLogModule {
 		#! Where the logfiles are kept
-		/LogDir		"logs"
+		/LogDir		!Defaults.any?LogDir
 		#! When to rotate the logifles in hour:minute
 		/RotateTime	"23:50"
-		/Servers
-		{
-			/Server
-			{
-				/SecurityLog
-				{
+		/Servers {
+			/Server {
+				/SecurityLog {
 					/FileName "Security.log"
 					/Header	"# TimeStamp REMOTE_ADDR HTTPS? [RequestLine] [HttpStatusCode:HttpResponseMsg] [Reason] [FaultyRequestLine]"
 					/Format {
