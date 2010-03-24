@@ -14,7 +14,7 @@ def tearDown(target, source, env):
     pass
 
 buildSettings = {
-    packagename : {
+    'lib' : {
         'includeSubdir'    : 'helloworld_src',
         'linkDependencies' : ['CoastActions'],
         'sourceFiles'      : SConsider.listFiles(['helloworld_src/*.cpp']),
@@ -25,10 +25,10 @@ buildSettings = {
             'includes'     : SConsider.listFiles(['helloworld_src/*.h']),
         }
     },
-    'Runner' : {
+    packagename : {
         'targetType'       : 'AppTest',
-        'requires'         : [packagename + '.' + packagename, 'CoastRenderers', 'CoastStdDataAccess', 'CoastAppLog'],
-        'usedTarget'       : 'wdapp.wdapp',
+        'requires'         : [packagename + '.lib', 'CoastRenderers', 'CoastStdDataAccess', 'CoastAppLog'],
+        'usedTarget'       : 'coastd.coastd',
         'copyFiles'        : [(SConsider.findFiles(['config'],['.txt', '.html', '.any', '.pem', '.png', '.jpg']), S_IRUSR|S_IRGRP|S_IROTH)],
         'runConfig'        : {
             'setUp': setUp,
