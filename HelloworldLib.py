@@ -9,27 +9,34 @@ def setUp(target, source, env):
     path = env['BASEOUTDIR'].Dir(os.path.join('tests', packagename)).Dir('config')
     if not os.path.isdir(logpath.abspath):
         os.makedirs(logpath.abspath)
+    wdpath=':'.join(['.',
+            'config',
+        ])
+    os.putenv('WD_PATH', wdpath)
 
 def tearDown(target, source, env):
     pass
 
 buildSettings = {
-    'lib' : {
+    packagename : {
         'includeSubdir'    : 'helloworld_src',
         'linkDependencies' : ['CoastActions'],
         'sourceFiles'      : SConsider.listFiles(['helloworld_src/*.cpp']),
         'targetType'       : 'LibraryShared',
-        'appendUnique'     : { 'CPPDEFINES' : [packagename.upper() + '_IMPL'] },
+        'appendUnique'     : { 'CPPDEFINES' : ['HELLOWORLD_IMPL'] },
         'public' : {
             'includeSubdir': 'helloworld_src',
             'includes'     : SConsider.listFiles(['helloworld_src/*.h']),
         }
     },
-    packagename : {
+    'app' : {
         'targetType'       : 'AppTest',
-        'requires'         : [packagename + '.lib', 'CoastRenderers', 'CoastStdDataAccess', 'CoastAppLog'],
+        'requires'         : [packagename + '.' + packagename, 'CoastRenderers', 'CoastStdDataAccess', 'CoastAppLog'],
         'usedTarget'       : 'coastd.coastd',
-        'copyFiles'        : [(SConsider.findFiles(['config'],['.txt', '.html', '.any', '.pem', '.png', '.jpg']), S_IRUSR|S_IRGRP|S_IROTH)],
+        'copyFiles'        : [
+            ( SConsider.findFiles(['config'], extensions=['.txt', '.html', '.any', '.css', '.pem']), S_IRUSR|S_IRGRP|S_IROTH),
+            ( SConsider.findFiles(['config'], extensions=['.gif', '.ico', '.png', '.jpg', ]), S_IRUSR | S_IRGRP | S_IROTH),
+        ],
         'runConfig'        : {
             'setUp': setUp,
             'tearDown': tearDown,
