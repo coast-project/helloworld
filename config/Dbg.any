@@ -7,8 +7,8 @@
 {
 	/Version		"$Id$"
 
-	/LowerBound		0
-	/UpperBound		44
+	/LowerBound		10
+	/UpperBound		400
 	/DumpAnythings  1
 
 	/Server {
@@ -135,7 +135,90 @@
 			/Action						20
 		}
 	}
-
+	/WebAppService {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/ServiceDispatcher {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/RendererDispatcher {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/ServiceHandler {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/RequestProcessor {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/HTTPProcessor {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/URI2FileNameMapper {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/HTTPFileLoader {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/FileDAImpl {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/ServerPoolsManagerInterface {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/AcceptorFactory {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/Socket {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/Acceptor {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/AcceptorCallBack {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/CallBackFactory {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/EndPoint {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/ConnectorArgs {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/SSLSocket {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/SSLClientSocket {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/SSLServerSocket {
+		/MainSwitch						60
+		/EnableAll						70
+	}
+	/SSLModule {
+		/MainSwitch						60
+		/EnableAll						70
+	}
 	/Action {
 		/MainSwitch						60
 		/EnableAll						70
@@ -153,6 +236,10 @@
 	/SecurityModule {
 		/MainSwitch						40
 		/EnableAll						0
+	}
+	/System {
+		/MainSwitch						60
+		/EnableAll						70
 	}
 #--- Renderers -------------------------------------
 

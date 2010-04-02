@@ -117,7 +117,7 @@
 #--- ServiceHandlersModule configuration ---------------------------------------
 
 	/ServiceHandlers {
-		/SimpleDataAccessService { HttpFile }
+		/SimpleDataAccessService { HttpFile FaviconLoader }
 	}
 
 #--- SecurityModule configuration -------------------------------------
@@ -145,6 +145,7 @@
 	/DataAccessImpls {
 		/HTTPFileLoader {
 			HttpFile		# simple loader for static files
+			FaviconLoader
 		}
 	}
 
@@ -154,12 +155,14 @@
 		/Input {
 			/URI2FileNameMapper {
 				HttpFile
+				FaviconLoader
 			}
 		}
 		/Output {
 			/HTTPBodyMapper {
 				HttpFile	# simple output mapper for different static files
 							# it needs http body mapper because of the binary image
+				FaviconLoader
 			}
  		}
 	}

@@ -33,7 +33,7 @@
 		HTTPS
 	}
 
-	/DocumentRoot		"config/HTMLTemplates"
+	/DocumentRoot		"config"
 
 #--- default settings for session creation --------------------------
 
@@ -44,12 +44,12 @@
 
 #--- settings specific to built-in HTTP server/HTTPProcessor --------
 
- 	/ImagePath		    "/static/images/"
-	/Dispatcher	RendererDispatcher
+ 	/ImagePath		    "/images/"
+	/Dispatcher			RendererDispatcher
 
  	/URIPrefix2ServiceMap {			# map to define service handler
-		/"/favicon.ico"	HttpFile
-		/"/static"		HttpFile
+		/"/favicon.ico"	FaviconLoader
+		/"/images"		HttpFile
 		/"/helloworld"	wdsample
 		/"/"			wdsample
 	}
@@ -63,6 +63,7 @@
 		/html   "text/html"
 		/css	"text/css"
 		/js		"text/javascript"
+		/ico	"image/x-icon"
 	}
 
 #--- BaseURL support ------------------------------------------------
@@ -83,7 +84,6 @@
 
 #--- Localization and language issues -----------------------------------------
 
-#	/StringFile			"LocalizedStrings"  # string ressource file for different languages
 	/Language 			D					# default language (overriden per user)
 	/UseBrowserLang		0					# set to 1 if you want to use browsers prefs
 	/LanguageKeyMap {
