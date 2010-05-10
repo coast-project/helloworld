@@ -12,7 +12,7 @@ def setUp(target, source, env):
     wdpath=':'.join(['.',
             'config',
         ])
-    os.putenv('WD_PATH', wdpath)
+    env['ENV']['WD_PATH'] = wdpath
 
 def tearDown(target, source, env):
     pass
