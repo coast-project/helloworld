@@ -1,9 +1,9 @@
 #--------------------------------------------------------------------
-# Copyright (c) 2009, Peter Sommerlad and IFS Institute for Software at HSR Rapperswil, Switzerland
+# Copyright (c) 2010, Peter Sommerlad and IFS Institute for Software at HSR Rapperswil, Switzerland
 # All rights reserved.
 #
 # This library/application is free software; you can redistribute and/or modify it under the terms of
-# the BSD-style license that is included with this library/application in the file license.txt.
+# the license that is included with this library/application in the file license.txt.
 #--------------------------------------------------------------------
 {
 	# defines http listener
@@ -17,16 +17,17 @@
 		/CertFileServer	"recipes_cert.pem"
 		/KeyFileServer	"recipes_key.pem"
 	}
+	#/SSLPeerCAFile	"helloCA.pem"
 
 	# directory to place logfiles into
-	/LogDir			"logs"
+	/LogDir			"##LOGDIRREL##"
 
-	/PIDFileName	"logs/helloworld.PID"		# location and name of the pid file
+	/PIDFileName	"##PIDFILEPATHNAME##"		# location and name of the pid file
 
-	/UserName		""
+	/UserName		"##RUNUSERNAME##"
 
-	/BFKey			!bf_key.any?Key
-	/BFInitVec0 	!bf_key.any?InitVec0
-	/BFInitVec1		!bf_key.any?InitVec1
-	/MDKey			!sign_key.any?Key
+	/BFKey			"S0M3B10wfi5hK"
+	/BFInitVec0		0xa5f31c3b
+	/BFInitVec1		0x7e4a12c0
+	/MDKey			"md5ign3r"
 }

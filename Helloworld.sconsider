@@ -4,15 +4,45 @@ from stat import *
 
 Import('*')
 
+def ModifyConfigFiles(env, searchReplace=[], files=[]):
+    for file in files:
+        fname = file.abspath
+        if os.path.isfile(fname):
+            oldmode=os.stat(fname).st_mode
+            ## set writable
+            os.chmod(fname, oldmode | S_IWUSR)
+            ## replace tokens in file
+            SConsider.replaceRegexInFile(fname, searchReplace)
+            os.chmod(fname, oldmode)
+
+logpathrel='logs'
+rotatepathrel='rotate'
+logrotatepathrel=os.path.join(logpathrel, rotatepathrel)
+servername=packagename
+pidfilename='.'.join([servername, 'PID'])
+runusername=''
+
 def setUp(target, source, env):
-    logpath = env['BASEOUTDIR'].Dir(os.path.join('tests', packagename, 'logs', 'rotate'))
-    path = env['BASEOUTDIR'].Dir(os.path.join('tests', packagename)).Dir('config')
-    if not os.path.isdir(logpath.abspath):
-        os.makedirs(logpath.abspath)
-    wdpath=':'.join(['.',
-            'config',
-        ])
+    targetdir = env['BASEOUTDIR'].Dir(env['RELTARGETDIR'])
+    logdir = targetdir.Dir(logrotatepathrel)
+    if not os.path.isdir(logdir.abspath):
+        os.makedirs(logdir.abspath)
+    wdpath=':'.join([
+        '.',
+        'config',
+    ])
+    env['ENV']['WD_ROOT'] = targetdir.abspath
     env['ENV']['WD_PATH'] = wdpath
+    searchReplace = [
+        (r"##LOGDIRREL##", logpathrel),
+        (r"##ROTATEDIRREL##", rotatepathrel),
+        (r"##WD_PATH##", wdpath),
+        (r"##WD_ROOT##", targetdir.abspath),
+        (r"##SERVERNAME##", servername),
+        (r"##PIDFILEPATHNAME##", os.path.join(logpathrel,pidfilename)),
+        (r"##RUNUSERNAME##", runusername),
+    ]
+    ModifyConfigFiles(env, searchReplace, SConsider.findFiles([os.path.join(targetdir.abspath,'config')],['.any','.sh']))
 
 def tearDown(target, source, env):
     pass
@@ -29,13 +59,14 @@ buildSettings = {
             'includes'     : SConsider.listFiles(['helloworld_src/*.h']),
         }
     },
-    'app' : {
+    'wdapp' : {
         'targetType'       : 'AppTest',
         'requires'         : [packagename + '.' + packagename, 'CoastRenderers', 'CoastStdDataAccess', 'CoastAppLog'],
         'usedTarget'       : 'coastd.coastd',
         'copyFiles'        : [
             ( SConsider.findFiles(['config'], extensions=['.txt', '.html', '.any', '.css', '.pem']), S_IRUSR|S_IRGRP|S_IROTH),
             ( SConsider.findFiles(['config'], extensions=['.gif', '.ico', '.png', '.jpg', ]), S_IRUSR | S_IRGRP | S_IROTH),
+            ( SConsider.findFiles(['config'], extensions=['.sh', ]), S_IRUSR | S_IRGRP | S_IROTH),
         ],
         'runConfig'        : {
             'setUp': setUp,

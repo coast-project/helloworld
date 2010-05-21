@@ -3,7 +3,7 @@
 # All rights reserved.
 #
 # This library/application is free software; you can redistribute and/or modify it under the terms of
-# the BSD-style license that is included with this library/application in the file license.txt.
+# the license that is included with this library/application in the file license.txt.
 #--------------------------------------------------------------------
 {
 	/DLL {
@@ -216,7 +216,7 @@
 	/AppLogModule {
 		#! Where the logfiles are kept
 		/LogDir		!Defaults.any?LogDir
-		#! When to rotate the logifles in hour:minute
+		#! When to rotate the logfiles in hour:minute
 		/RotateTime	"23:50"
 		/Servers {
 			/Server {

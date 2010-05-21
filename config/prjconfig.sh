@@ -1,29 +1,21 @@
-###########################################################################
-# Copyright (c) 1999-2000 itopia
-# All Rights Reserved
+#--------------------------------------------------------------------
+# Copyright (c) 2010, Peter Sommerlad and IFS Institute for Software at HSR Rapperswil, Switzerland
+# All rights reserved.
 #
-# $Id$
-#
-# project specific variables and directories, loaded from within config.sh
-#
-############################################################################
-
-############################################################################
-#
-# In this ection you should only adjust but NOT remove any of the given variables
-# because these are used from within other scripts
-#
+# This library/application is free software; you can redistribute and/or modify it under the terms of
+# the license that is included with this library/application in the file license.txt.
+#--------------------------------------------------------------------
 
 # overwrite this one ONLY if the LOGDIR variable points to the wrong place
-LOGDIR=logs
+LOGDIR=##LOGDIRREL##
 
-SERVERNAME="helloworld"
-#PRJ_DESCRIPTION="Telekurs FTP-Frontdoor"
+SERVERNAME=##SERVERNAME##
+#PRJ_DESCRIPTION="Some Server"
 #PID_FILE=$PROJECTDIR/$LOGDIR/$SERVERNAME.PID
 
 # RUN_USER variable will be used by bootScript.sh to start the server as a different user at boot time or later
 # -> this setting is needed to control the server (start|stop|restart...) by a user different than root
-#RUN_USER=notRootUser
+RUN_USER=##RUNUSERNAME##
 
 # RUN_ATTACHED_TO_GDB variable will be used by startwds.sh to start the server under gdb control
 # if you want to use either keepwds.sh or bootScript.sh to start the server, this flag should be set here
@@ -40,15 +32,8 @@ SERVERNAME="helloworld"
 # because some CD burning software do only store 8.3 names
 TARGZNAME=$SERVERNAME.tgz
 
-# specify ALL of your filterable configurations, to build for a specific configuration
-# you have to specify ONE on the command line in case of a doall.sh execution
-SWITCHGROUPS="DevTest Prod TestsTKF TestsFoolabs|TestCases|itopia foolabs tkf"
-#SWITCHRULE="TestCases&&tkf"		# TestsTKF
-#SWITCHRULE="TestCases&&foolabs"	# TestsFoolabs
-SWITCHRULE="DevTest"		# DevTest
-
 # overwrite this one ONLY if the WD_PATH variable points to the wrong place
-#WD_PATH=config
+WD_PATH=##WD_PATH##
 
 # The flag WD_USE_MMAP_STREAMS controls the usage of memory mapped files. Default is to use mmap streams
 #  because for most operations and conditions this seems to be fast.
@@ -64,25 +49,3 @@ SWITCHRULE="DevTest"		# DevTest
 #  2: Trace detailed statistics
 #  3: Trace unfreed blocks
 #export TRACE_STORAGE=0
-
-# use this function to do preparations prior to creating the distribution package
-# e.g. increment a build number
-#function preDoallFunc {}
-
-# The following variables are used during package generation using MkPckg.sh or the old doall.sh
-# Its values are needed within cpall.sh and control if project-directories and its contents get copied.
-# do we have to copy WDA_BIN/WDS_BIN binary, default 1, otherwise set to 0
-cfg_doBin=1;
-# do we have to copy libraries from WD_LIBDIR, default 1, otherwise set to 0
-cfg_doLib=1;
-# do we have to copy CONFIGDIR contents, default 1, otherwise set to 0
-cfg_doCfg=1;
-# do we have to create a log directory, default 1, otherwise set to 0
-cfg_doLog=1;
-# do we have to copy WebDisplay2 scripts into package, default 1, otherwise set to 0
-cfg_doScr=1;
-
-############################################################################
-#
-# from here on you can add your own variables which you can use in the
-# project specific prjcopy.sh file for example

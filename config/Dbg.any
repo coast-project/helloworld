@@ -1,12 +1,11 @@
- #--------------------------------------------------------------------
- # Copyright (c) 2000 itopia
- # All Rights Reserved
- #
- # Dbg.any : tracing configuration file
- #--------------------------------------------------------------------
+#--------------------------------------------------------------------
+# Copyright (c) 2010, Peter Sommerlad and IFS Institute for Software at HSR Rapperswil, Switzerland
+# All rights reserved.
+#
+# This library/application is free software; you can redistribute and/or modify it under the terms of
+# the license that is included with this library/application in the file license.txt.
+#--------------------------------------------------------------------
 {
-	/Version		"$Id$"
-
 	/LowerBound		10
 	/UpperBound		400
 	/DumpAnythings  1
