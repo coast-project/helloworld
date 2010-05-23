@@ -49,10 +49,10 @@ def tearDown(target, source, env):
 
 buildSettings = {
     packagename : {
+        'targetType'       : 'LibraryShared',
         'includeSubdir'    : 'helloworld_src',
         'linkDependencies' : ['CoastActions'],
         'sourceFiles'      : SConsider.listFiles(['helloworld_src/*.cpp']),
-        'targetType'       : 'LibraryShared',
         'appendUnique'     : { 'CPPDEFINES' : ['HELLOWORLD_IMPL'] },
         'public' : {
             'includeSubdir': 'helloworld_src',
@@ -60,7 +60,7 @@ buildSettings = {
         }
     },
     'wdapp' : {
-        'targetType'       : 'AppTest',
+        'targetType'       : 'ProgramApp',
         'requires'         : [packagename + '.' + packagename, 'CoastRenderers', 'CoastStdDataAccess', 'CoastAppLog'],
         'usedTarget'       : 'coastd.coastd',
         'copyFiles'        : [
