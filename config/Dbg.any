@@ -237,7 +237,7 @@
 		/EnableAll						0
 	}
 	/System {
-		/MainSwitch						60
+		/MainSwitch						0
 		/EnableAll						70
 	}
 #--- Renderers -------------------------------------
@@ -353,9 +353,8 @@
 		/RenderAll						40
 	}
 
-
 	/Registry {
-		/MainSwitch						10
+		/MainSwitch						0
 		/EnableAll						20
 
 	}

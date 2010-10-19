@@ -1,16 +1,21 @@
-#--------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------
 # Copyright (c) 2010, Peter Sommerlad and IFS Institute for Software at HSR Rapperswil, Switzerland
 # All rights reserved.
 #
 # This library/application is free software; you can redistribute and/or modify it under the terms of
 # the license that is included with this library/application in the file license.txt.
-#--------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------
 {
+#--- MasterServer configuration ----------------------------------------------------
 	/ServerModules {
 		{
-			/ServerName		Server
+			/ServerName				Server
+			/UsePoolStorage			1					# optional, [0|1], default 0, use preallocated memory pool for storage of Queue elements
+			/PoolStorageSize		4001				# optional, [kB], default 10240, pool storage size in kbytes
+			/NumOfPoolBucketSizes	26					# optional, default 10, number of different allocation units within PoolStorage, starts at 16 bytes and always doubles the size so 16 << 10 will give a max usable size of 8192 bytes
 		}
 	}
+
 	# generate a file with the servers pid; useful to send kill -HUP pid
 	/UsePIDFile		1
 	# location and name of the pid file
@@ -25,28 +30,16 @@
 	/ThreadPoolSize			15					# number of parallel pending requests
 	/AwaitResetEmpty		10
 
-	/RequestProcessor		HTTPProcessor		# processor for accepted requests
-	/URISizeLimit 			1024
-
 	/ListenerPool {					# this server listens on 2 ports
 		HTTP
 		HTTPS
 	}
 
-	/DocumentRoot		"config"
+# --- builtin HTTP server configuration --------------------------------
+	/ServicePrefix		helloworld
 
-#--- default settings for session creation --------------------------
-
-	/RoleChanges { }
-	/StartPage		"HelloWorldPage"
-	/DefaultRole	"Role"
-	/DefaultAction	"GoHelloWorldPage"
-
-#--- settings specific to built-in HTTP server/HTTPProcessor --------
-
- 	/ImagePath		    "/images/"
+# --- Dispatcher configuration --------------------------------
 	/Dispatcher			RendererDispatcher
-
  	/URIPrefix2ServiceMap {			# map to define service handler
 		/"/favicon.ico"	FaviconLoader
 		/"/images"		HttpFile
@@ -54,7 +47,31 @@
 		/"/"			wdsample
 	}
 
-	/ServicePrefix		helloworld
+# --- HTTPProcessor configuration --------------------------------
+	/RequestProcessor		HTTPProcessor		# processor for accepted requests
+	/URISizeLimit 			4096
+	/RequestSizeLimit       5120
+	/LineSizeLimit          4096
+
+	/DisableZipEncoding	0
+	/ContentGzipEncoding {
+		/"text/html"	1
+	}
+
+# --- Session configuration --------------------------------
+	/URLFilterSpec {
+		/Tags2Unscramble { X1 X2 X }
+	}
+
+	/StartPage		"HelloWorldPage"
+	/DefaultRole	"Role"
+	/DefaultAction	"GoHelloWorldPage"
+
+	/RoleChanges { }
+
+	/DocumentRoot		"config"
+
+ 	/ImagePath		    "/images/"
 
 	/Ext2MIMETypeMap {
 		/gif	"image/gif"
@@ -73,13 +90,9 @@
 	/BaseAddress {
 		/Condition {
 			/ContextCondition { header.HTTPS }
-			/True 	{ "https://" {/Lookup HostName} }
-			/False 	{ "http://" {/Lookup HostName} }
+			/True 	{ "https://" %HostName }
+			/False 	{ "http://" %HostName }
 		}
-	}
-
-	/URLFilterSpec {
-		/Tags2Unscramble { X1 X2 X }
 	}
 
 #--- Localization and language issues -----------------------------------------
@@ -87,9 +100,9 @@
 	/Language 			D					# default language (overriden per user)
 	/UseBrowserLang		0					# set to 1 if you want to use browsers prefs
 	/LanguageKeyMap {
-		/D				{ "de" "de-CH" "de-DE" "de-AU" }
-		/E				{ "en" "en-GB" "en-US" }
-		/F				{ "fr" "fr-BE" "fr-CA" "fr-FR" "fr-CH" }
-		/I				{ "it" }
+		/D { "de-CH" "de-ch" "de" "de-DE" "de-AU" }
+		/E { "en" "en-US" "en-us" "en-GB" "en-gb" }
+		/F { "fr" "fr-CH" "fr-ch" "fr-lu" "fr-FR"}
+		/I { "it" "it-CH" "it-ch" }
 	}
 }
