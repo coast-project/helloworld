@@ -235,13 +235,13 @@
 					/Format {
 						{ /DateRenderer { /Format "%a, %m-%d-%Y %T" /DeltaGMT 1 }  }
 						" "
-						{ /Lookup RequestReader.REMOTE_ADDR }
+						{ /Lookup HTTPRequestReader.REMOTE_ADDR }
 						" "
-						{ /Lookup RequestReader.HTTPS }
-						" [" { /Lookup RequestReader.Request.REQUEST_METHOD } "]"
-						" [" { /Lookup RequestReader.HttpStatusCode } ":" { /Lookup RequestReader.HttpResponseMsg } "]"
-						" [" { /Lookup RequestReader.Reason } "]"
-						" [" { /Lookup RequestReader.FaultyRequestLine } "]"
+						{ /Lookup HTTPRequestReader.HTTPS }
+						" [" { /Lookup HTTPRequestReader.Request.REQUEST_METHOD } "]"
+						" [" { /Lookup HTTPRequestReader.HttpStatusCode } ":" { /Lookup HTTPRequestReader.HttpResponseMsg } "]"
+						" [" { /Lookup HTTPRequestReader.Reason } "]"
+						" [" { /Lookup HTTPRequestReader.FaultyRequestLine } "]"
 					}
 				}
 			}
