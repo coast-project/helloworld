@@ -146,8 +146,8 @@ def setUp( target, source, env ):
     searchReplace = [
         (r"##LOGDIRREL##", logpathrel),
         (r"##ROTATEDIRREL##", rotatepathrel),
-        (r"##WD_PATH##", wdpath),
-        (r"##WD_ROOT##", tdirabs),
+        (r"##COAST_PATH##", wdpath),
+        (r"##COAST_ROOT##", tdirabs),
         (r"##SERVERNAME##", servername),
         (r"##PIDFILEPATHNAME##", os.path.join(logpathrel,pidfilename)),
         (r"##RUNUSERNAME##", runusername),

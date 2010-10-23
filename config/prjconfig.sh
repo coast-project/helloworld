@@ -32,16 +32,16 @@ RUN_USER=##RUNUSERNAME##
 # because some CD burning software do only store 8.3 names
 TARGZNAME=$SERVERNAME.tgz
 
-# overwrite this one ONLY if the WD_PATH variable points to the wrong place
-WD_PATH=##WD_PATH##
+# overwrite this one ONLY if the COAST_PATH variable points to the wrong place
+COAST_PATH=##COAST_PATH##
 
-# The flag WD_USE_MMAP_STREAMS controls the usage of memory mapped files. Default is to use mmap streams
+# The flag COAST_USE_MMAP_STREAMS controls the usage of memory mapped files. Default is to use mmap streams
 #  because for most operations and conditions this seems to be fast.
 # When setting this variable to 0, fstreams will be used instead
 # note: Memory mapped files will always increase the file size by an internally managed blocksize,
 #  on SunOS_5.8, this blocksize seems to be 8192 bytes. If you intend to use a tail -f on these files
 #  you will probably not get what you expect. tail can not handle the reserved - and still unused - space.
-#export WD_USE_MMAP_STREAMS=0
+#export COAST_USE_MMAP_STREAMS=0
 
 # The flag TRACE_STORAGE defines the logging level of memory statistics
 #  0: No pool statistic tracing, except when excess memory was used
