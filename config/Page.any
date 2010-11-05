@@ -48,7 +48,7 @@
 					{/Date { /Format "%A the %#d. %B %Y, %X" }}
 				"</td>"
 				"<td width=30% align=center>"
-					"Powered by WebDisplay2"
+					"Powered by coast"
 				"</td>"
 				"<td width=35% align=right>"
 					"<a href='mailto:marcel.huber@hsr.ch'>Changes are welcome: marcel.huber@hsr.ch</a>"
