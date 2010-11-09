@@ -128,7 +128,6 @@
 		/GetPersistentName				20
 		/WriteLinkStatePersistent		20
 
-
 		/DoCallActionOn	{
 			/Current 					20
 			/Action						20
@@ -269,9 +268,13 @@
 	}
 
 	/HTMLTemplateRenderer {
-		/MainSwitch						4
+		/MainSwitch						0
 		/EnableAll						40
 		/RenderAll						44
+	}
+	/HTMLTemplateCacheBuilder {
+		/MainSwitch						0
+		/EnableAll						40
 	}
 	/HTMLTemplateCacheLoader {
 		/MainSwitch						0

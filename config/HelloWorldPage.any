@@ -22,7 +22,7 @@
 			/Method "GET"
 			/Action	"GoPicturePage"
 			/Template {
-				"[[#wd Lookup StartButton ]]"
+				"<? /Lookup StartButton ?>"
 			}
 		}
 	}

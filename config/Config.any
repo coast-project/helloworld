@@ -79,10 +79,6 @@
 		/CleanerTimeout		60
 	}
 
-	/ContentGzipEncoding {
-		/"text/html"	1
-	}
-
 #--- RolesModule configuration --------------------------------------
 
 	/Roles {
