@@ -1,18 +1,13 @@
 /*
- * Copyright (c) 2000 itopia
- * All Rights Reserved
+ * Copyright (c) 2009, Peter Sommerlad and IFS Institute for Software at HSR Rapperswil, Switzerland
+ * All rights reserved.
  *
- * HelloWorldAction:   
- *
- * $Id$
+ * This library/application is free software; you can redistribute and/or modify it under the terms of
+ * the license that is included with this library/application in the file license.txt.
  */
 
 #ifndef _HelloWorldAction_H
 #define _HelloWorldAction_H
-
-#ifdef __GNUG__
-	#pragma interface
-#endif
 
 //---- Action include -------------------------------------------------
 #include "config_helloworld.h"
@@ -38,7 +33,7 @@ public:
 	//! \param config the configuration of the action.
 	//! \return true if the action run successfully, false if an error occurred.
 	virtual bool DoExecAction(String &transitionToken, Context& ctx, const ROAnything &config);
-	
+
 };
 
 #endif
