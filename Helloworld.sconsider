@@ -12,12 +12,7 @@ logrotatepathrel=os.path.join(logpathrel, rotatepathrel)
 servername=packagename
 pidfilename='.'.join([servername, 'PID'])
 runusername=''
-fqdn=socket.getfqdn()
-hostonly=fqdn.split('.')[0]
-try:
-    domain='.'.join(fqdn.split('.')[1:])
-except:
-    domain=""
+hostonly, domain, fqdn = SConsider.getfqdn()
 
 def appendReplaceCommandForCert(key, filename, searchReplace):
     try:
