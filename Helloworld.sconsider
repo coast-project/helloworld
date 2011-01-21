@@ -3,6 +3,7 @@ import os, socket, pdb, re
 import shutil
 from stat import *
 from OpenSSL import SSL, crypto
+from SomeUtils import runCommandWithInput
 
 Import('*')
 
@@ -41,27 +42,6 @@ def ModifyConfigFiles(env, searchReplace=[], files=[]):
             SConsider.replaceRegexInFile(fname, searchReplace)
             os.chmod(fname, oldmode)
 
-def runCommand(args, logpath, stdincontent=None, useShell=False, cwd=None):
-    import subprocess
-    theCommand = subprocess.Popen(args, stdin=subprocess.PIPE,
-                                 stderr=subprocess.PIPE,
-                                 stdout=subprocess.PIPE,
-                                 shell=useShell,
-                                 cwd=cwd)
-
-    theCommand_out, theCommand_err = theCommand.communicate(stdincontent)
-
-    if not os.path.isdir(logpath):
-        os.makedirs(logpath)
-    logfilebasename=os.path.basename(args[0])
-    if theCommand_err:
-        with open(os.path.join(logpath, logfilebasename + '.stderr'), 'w') as errfile:
-            errfile.write(theCommand_err)
-    if theCommand_out:
-        with open(os.path.join(logpath, logfilebasename + '.stdout'), 'w') as outfile:
-            outfile.write(theCommand_out)
-    return theCommand.returncode
-
 def prepareMkCaParams(env, commandargs, tdirabs, certOutDir, mkcaScriptName, cnfFilename=''):
     ## set writable cfgfilename
     targets = SConsider.packageRegistry.getPackageTarget('openssl', 'openSSL')
@@ -98,7 +78,7 @@ def createCertificates(env, targetdir, mkcaScriptName, certdirrel='cert_files', 
     certDict={}
     retCode=1
     if len(commandargs):
-        retCode=runCommand(commandargs, logpathabs, stdincontent='\n'.join(stdincontent))
+        retCode=runCommandWithInput(commandargs, logpathabs, stdincontent='\n'.join(stdincontent))
     if retCode == 0 and doCertDict:
         # get list of copied certificates
         certFileNodesList=SConsider.findFiles([certOutDir], ['.pem','.p12'])
@@ -110,7 +90,7 @@ def createCertificates(env, targetdir, mkcaScriptName, certdirrel='cert_files', 
             sslbin=''+target.abspath+' -S --'
         # if there is now c_rehash available, use the following improved script, (base from from http://www.commandlinefu.com/commands/view/2532/c_rehash-replacement)
         command='for file in *crt*.pem; do theHash=`'+sslbin+' x509 -hash -noout -in $file 2>/dev/null` && test ! -f ${theHash}.0 && ln -s $file ${theHash}.0; done'
-        retCode=runCommand(command, logpathabs, stdincontent=None, useShell=True, cwd=certOutDir)
+        retCode=runCommandWithInput(command, logpathabs, stdincontent=None, useShell=True, cwd=certOutDir)
     return (certOutDir, certFileNodesList, certDict)
 
 def createCertDict(certFileNodesList):
