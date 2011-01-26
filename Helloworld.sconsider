@@ -3,7 +3,7 @@ import os, socket, pdb, re
 import shutil
 from stat import *
 from OpenSSL import SSL, crypto
-from SomeUtils import runCommandWithInput
+from SomeUtils import runCommand
 
 Import('*')
 
@@ -78,7 +78,7 @@ def createCertificates(env, targetdir, mkcaScriptName, certdirrel='cert_files', 
     certDict={}
     retCode=1
     if len(commandargs):
-        retCode=runCommandWithInput(commandargs, logpathabs, stdincontent='\n'.join(stdincontent))
+        retCode=runCommand(commandargs, logpath=logpathabs, stdincontent='\n'.join(stdincontent))
     if retCode == 0 and doCertDict:
         # get list of copied certificates
         certFileNodesList=SConsider.findFiles([certOutDir], ['.pem','.p12'])
@@ -90,7 +90,7 @@ def createCertificates(env, targetdir, mkcaScriptName, certdirrel='cert_files', 
             sslbin=''+target.abspath+' -S --'
         # if there is now c_rehash available, use the following improved script, (base from from http://www.commandlinefu.com/commands/view/2532/c_rehash-replacement)
         command='for file in *crt*.pem; do theHash=`'+sslbin+' x509 -hash -noout -in $file 2>/dev/null` && test ! -f ${theHash}.0 && ln -s $file ${theHash}.0; done'
-        retCode=runCommandWithInput(command, logpathabs, stdincontent=None, useShell=True, cwd=certOutDir)
+        retCode=runCommand(command, logpath=logpathabs, stdincontent=None, shell=True, cwd=certOutDir)
     return (certOutDir, certFileNodesList, certDict)
 
 def createCertDict(certFileNodesList):
