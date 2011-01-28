@@ -8,7 +8,9 @@
 
 # overwrite this one ONLY if the LOGDIR variable points to the wrong place
 LOGDIR=##LOGDIRREL##
+ROTATEDIR=##ROTATEDIRREL##
 
+APP_NAME=##APP_NAME##
 SERVERNAME=##SERVERNAME##
 #PRJ_DESCRIPTION="Some Server"
 #PID_FILE=$PROJECTDIR/$LOGDIR/$SERVERNAME.PID
@@ -27,10 +29,6 @@ RUN_USER=##RUNUSERNAME##
 # if RUN_SERVICE is set to 0, the server will not be started/stopped except the -F option is given to override the variable
 #RUN_SERVICE_CFGFILE=${DEV_HOME}/my_services.sh
 #RUN_SERVICE=`/bin/ksh -c ". ${RUN_SERVICE_CFGFILE} >/dev/null 2>&1; eval \"echo $\"RUN_SERVICE_${SERVERNAME}"`
-
-# name of the tared and gzipped distribution file, caution: try to use short names
-# because some CD burning software do only store 8.3 names
-TARGZNAME=$SERVERNAME.tgz
 
 # overwrite this one ONLY if the COAST_PATH variable points to the wrong place
 COAST_PATH=##COAST_PATH##

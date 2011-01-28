@@ -10,7 +10,6 @@
 #define _HelloWorldAction_H
 
 //---- Action include -------------------------------------------------
-#include "config_helloworld.h"
 #include "Action.h"
 
 //---- HelloWorldAction ----------------------------------------------------------
@@ -20,7 +19,7 @@
 //!		/Slot1	....
 //!      ...
 //!	}</PRE>
-class EXPORTDECL_HELLOWORLD HelloWorldAction : public Action
+class HelloWorldAction : public Action
 {
 public:
 	//--- constructors
