@@ -133,6 +133,10 @@
 			/Action						20
 		}
 	}
+	/MIMEHeader {
+		/MainSwitch						60
+		/EnableAll						70
+	}
 	/WebAppService {
 		/MainSwitch						60
 		/EnableAll						70
