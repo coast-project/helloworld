@@ -18,20 +18,17 @@
 //!		/Slot1	....
 //!      ...
 //!	}</PRE>
-class HelloWorldAction : public Action
-{
+class HelloWorldAction: public Action {
 public:
-	//--- constructors
-    HelloWorldAction(const char *name);
-    ~HelloWorldAction();
-
-    //!DoSomething method for configured Actions 
-	//! \param transitionToken (in/out) the event passed by the caller, can be modified. 
+	HelloWorldAction(const char *name) :
+		Action(name) {
+	}
+	//!DoSomething method for configured Actions
+	//! \param transitionToken (in/out) the event passed by the caller, can be modified.
 	//! \param ctx the context the action runs within.
 	//! \param config the configuration of the action.
 	//! \return true if the action run successfully, false if an error occurred.
 	virtual bool DoExecAction(String &transitionToken, Context& ctx, const ROAnything &config);
-
 };
 
 #endif

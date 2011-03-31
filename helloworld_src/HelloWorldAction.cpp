@@ -5,19 +5,12 @@
  * This library/application is free software; you can redistribute and/or modify it under the terms of
  * the license that is included with this library/application in the file license.txt.
  */
-
 #include "HelloWorldAction.h"
 #include "Dbg.h"
-
 //---- HelloWorldAction ---------------------------------------------------------------
 RegisterAction(HelloWorldAction);
 
-HelloWorldAction::HelloWorldAction(const char *name) : Action(name) { }
-
-HelloWorldAction::~HelloWorldAction() { }
-
-bool HelloWorldAction::DoExecAction(String &transitionToken, Context &ctx, const ROAnything &config)
-{
+bool HelloWorldAction::DoExecAction(String &transitionToken, Context &ctx, const ROAnything &config) {
 	// this is the new method that also gets a config ( similar to Renderer::RenderAll )
 	// write the action code here - you don't have to override DoAction anymore
 	StartTrace(HelloWorldAction.DoExecAction);
