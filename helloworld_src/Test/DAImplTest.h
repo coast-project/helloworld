@@ -9,7 +9,6 @@
 #ifndef _DAImplTest_H
 #define _DAImplTest_H
 
-//---- baseclass include -------------------------------------------------
 #include "TestCase.h"
 
 //---- DAImplTest ----------------------------------------------------------

@@ -6,14 +6,8 @@
  * the license that is included with this library/application in the file license.txt.
  */
 
-//--- interface include -------------------------------------------------------
 #include "HelloWorldAction.h"
-
-//--- standard modules used ----------------------------------------------------
-#include "Context.h"
 #include "Dbg.h"
-
-//--- c-modules used -----------------------------------------------------------
 
 //---- HelloWorldAction ---------------------------------------------------------------
 RegisterAction(HelloWorldAction);

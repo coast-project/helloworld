@@ -9,7 +9,6 @@
 #ifndef _HelloWorldAction_H
 #define _HelloWorldAction_H
 
-//---- Action include -------------------------------------------------
 #include "Action.h"
 
 //---- HelloWorldAction ----------------------------------------------------------

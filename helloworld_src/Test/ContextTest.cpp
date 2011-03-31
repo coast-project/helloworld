@@ -6,18 +6,10 @@
  * the license that is included with this library/application in the file license.txt.
  */
 
-//--- standard modules used ----------------------------------------------------
+#include "ContextTest.h"
 #include "TestSuite.h"
-#include "Anything.h"
 #include "Context.h"
 #include "Page.h"
-#include "Dbg.h"
-
-//--- module under test -----------------------------------------------------
-#include "Context.h"
-
-//--- interface include -------------------------------------------------------
-#include "ContextTest.h"
 
 //---- ContextTest ----------------------------------------------------------------
 ContextTest::ContextTest(TString tstrName) : TestCaseType(tstrName)

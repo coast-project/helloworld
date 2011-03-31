@@ -6,19 +6,11 @@
  * the license that is included with this library/application in the file license.txt.
  */
 
-//--- standard modules used ----------------------------------------------------
-#include "TestSuite.h"
-#include "Anything.h"
-#include "Context.h"
-#include "DataAccess.h"
-#include "ReadFileDAImpl.h"
-#include "Dbg.h"
-
-//--- module under test -----------------------------------------------------
-#include "StreamingAnythingMapper.h"
-
-//--- interface include -------------------------------------------------------
 #include "DAImplTest.h"
+#include "TestSuite.h"
+#include "Context.h"
+#include "ReadFileDAImpl.h"
+#include "StreamingAnythingMapper.h"
 
 //---- DAImplTest ----------------------------------------------------------------
 DAImplTest::DAImplTest(TString tstrName) : TestCaseType(tstrName)
