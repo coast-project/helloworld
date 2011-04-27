@@ -8,30 +8,19 @@
 
 #include "DAImplTest.h"
 #include "TestSuite.h"
+#include "FoundationTestTypes.h"
 #include "Context.h"
 #include "ReadFileDAImpl.h"
 #include "StreamingAnythingMapper.h"
 
-//---- DAImplTest ----------------------------------------------------------------
-DAImplTest::DAImplTest(TString tstrName) : TestCaseType(tstrName)
-{
-	StartTrace(DAImplTest.Ctor);
-}
-
-DAImplTest::~DAImplTest()
-{
-	StartTrace(DAImplTest.Dtor);
-}
-
-void DAImplTest::CaseTest()
-{
+void DAImplTest::CaseTest() {
 	StartTrace(DAImplTest.CaseTest);
 
 	{
 		Anything inputArgs;
-		Context ctx( inputArgs );
-		ctx.GetTmpStore()["Filename"]= "data";
-		ctx.GetTmpStore()["Extension"]= "any";
+		Context ctx(inputArgs);
+		ctx.GetTmpStore()["Filename"] = "data";
+		ctx.GetTmpStore()["Extension"] = "any";
 
 		AnythingToStreamMapper in("TestFileRead");
 		in.Initialize("ParameterMapper");
@@ -42,17 +31,17 @@ void DAImplTest::CaseTest()
 		ReadFileDAImpl da("ReadFileDAImpl");
 		da.Initialize("TestFileRead");
 
-		da.Exec( ctx, &in, &out );
+		da.Exec(ctx, &in, &out);
 
 		Anything expected;
-		expected["a"]= "A";
-		expected["b"]= "B";
+		expected["a"] = "A";
+		expected["b"] = "B";
 		assertAnyEqual(expected, ctx.GetTmpStore()["Mapper"]["FileContent"]);
 	}
 
 	{
 		Anything inputArgs;
-		Context ctx( inputArgs );
+		Context ctx(inputArgs);
 
 		AnythingToStreamMapper in("TestFileRead");
 		in.Initialize("ParameterMapper");
@@ -64,19 +53,18 @@ void DAImplTest::CaseTest()
 		da.Initialize("DataAccessImpl");
 
 		ctx.Push("DataAccess", &da);
-		da.Exec( ctx, &in, &out );
+		da.Exec(ctx, &in, &out);
 		ctx.Remove("DataAccess");
 
 		Anything expected;
-		expected["a"]= "A";
-		expected["b"]= "B";
+		expected["a"] = "A";
+		expected["b"] = "B";
 		assertAnyEqual(expected, ctx.GetTmpStore()["Mapper"]["FileContent"]);
 	}
 }
 
 // builds up a suite of testcases, add a line for each testmethod
-Test *DAImplTest::suite ()
-{
+Test *DAImplTest::suite() {
 	StartTrace(DAImplTest.suite);
 	TestSuite *testSuite = new TestSuite;
 

@@ -11,26 +11,12 @@
 
 #include "TestCase.h"
 
-//---- DAImplTest ----------------------------------------------------------
-//!TestCases description
-class DAImplTest : public TestFramework::TestCase
-{
+class DAImplTest: public TestFramework::TestCase {
 public:
-	//--- constructors
-
-    //!TestCase constructor
-	//! \param name name of the test
-	DAImplTest(TString tstrName);
-
-    //!destroys the test case
-	~DAImplTest();
-
-	//--- public api
-
-	//!builds up a suite of testcases for this test
-	static Test *suite ();
-
-    //!describe this testcase
+	DAImplTest(TString tstrName) :
+		TestCaseType(tstrName) {
+	}
+	static Test *suite();
 	void CaseTest();
 };
 
