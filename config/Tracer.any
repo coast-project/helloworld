@@ -81,13 +81,6 @@
 		/Header							20
 		/Body							20
 		/Footer							20
-		#/Render {
-		#	/MainSwitch					15
-		#
-		#	/Render						15
-		#	/HTMLDbg					20
-		#}
-
 		/FindPage						20
 		/Register 						20
 		/PageInstaller					20
