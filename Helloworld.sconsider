@@ -99,7 +99,7 @@ def createCertificates(env, targetdir, mkcaScriptName, certdirrel='cert_files', 
     certFileNodesList=[]
     certDict={}
     retCode=1
-    if len(commandargs):
+    if commandargs:
         retCode=runCommand(commandargs, logpath=logpathabs, stdincontent='\n'.join(stdincontent))
     if retCode == 0 and doCertDict:
         # get list of copied certificates
@@ -136,9 +136,11 @@ def setUp( target, source, env ):
     mkcaScriptName=''
     searchReplace=[]
     filelist=SConsider.findFiles([configdirabs], matchfiles=['openssl.cnf'])
-    if len(filelist): sslconfpath=filelist[0].abspath
+    if filelist:
+        sslconfpath=filelist[0].abspath
     filelist=SConsider.findFiles([configdirabs], matchfiles=['mkca-new.sh'])
-    if len(filelist): mkcaScriptName=filelist[0].abspath
+    if filelist:
+        mkcaScriptName=filelist[0].abspath
     if mkcaScriptName: certOutDir,certFileNodesList,certDict=createCertificates(env, targetdir=targetdir, mkcaScriptName=mkcaScriptName, certdirrel='cert_files', createlogdirrel=os.path.join(env['LOGDIR'], env['VARIANTDIR']), cnfFilename=sslconfpath, doCertDict=True)
     if certDict:
         for key,value in certDict.items():
