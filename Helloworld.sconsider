@@ -129,7 +129,8 @@ def setUp( target, source, env ):
     configdirabs = targetdir.Dir(configdir).abspath
     env['ENV']['COAST_ROOT'] = tdirabs
     env['ENV']['COAST_PATH'] = ':'.join(configdirs)
-    env['ENV']['COAST_LOGONCERR'] = 3
+#    env['ENV']['COAST_TRACE_INITFINIS'] = 1
+#    env['ENV']['COAST_LOGONCERR'] = 3
     env['ENV']['COAST_USE_MMAP_STREAMS'] = '0'
     # create certificate files
     sslconfpath=''
