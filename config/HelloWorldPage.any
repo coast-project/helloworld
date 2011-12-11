@@ -15,25 +15,4 @@
 			/TemplateName { HelloWorldPage }
 		}
 	}
-
-	#---- Parts --------------------------------------------------------------
-	/Start {
-		/Form {
-			/Method "GET"
-			/Action	"GoPicturePage"
-			/Template {
-				"<? /Lookup StartButton ?>"
-			}
-		}
-	}
-
-	/StartButton {
-		/Button {
-			/Name "submit"
-			/Label {
-				/Type String
-				/Default "  Picture  "
-			}
-		}
-	}
 }
