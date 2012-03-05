@@ -11,9 +11,9 @@ logpathrel='logs'
 rotatepathrel='rotate'
 configdir='config'
 configdirs=[
-    '.',
     configdir,
     'cert_files',
+    '.',
 ]
 appname='app'
 runusername=''
